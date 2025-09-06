@@ -1,11 +1,12 @@
+using SistemasOperacionais.Maquina;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Sistemas-Operacionais.Maquina;
+
+namespace SistemasOperacionais.Maquina;
 
 public class Memoria
 {

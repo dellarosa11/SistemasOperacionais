@@ -1,32 +1,34 @@
-using simulador_so.Hardware;
+using SistemasOperacionais.Modelos;
+using SistemasOperacionais.Maquina;
+using SistemasOperacionais.Programa;
+using SistemasOperacionais.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Sistemas-Operacionais;
-
-internal class SO
+namespace SistemasOperacionais
 {
-    public List<CPU> CPUs = new();
-
-    public void InicializarCPUs(int quantidade)
+    internal class SO : ModeloProcesso, IEscalonador , ICriarProcesso
     {
-        for (int i = 0; i < quantidade; i++)
+        public List<CPU> CPUs = new();
+
+        public void InicializarCPUs(int quantidade)
         {
-            CPUs.Add(new CPU());
+            for (int i = 0; i < quantidade; i++)
+            {
+                CPUs.Add(new CPU());
+            }
         }
-    }
 
-    public void CriarProcesso()
-    {
-        // A ser implementado
-    }
+        public void CriarProcesso()
+        {
+            // Lógica para criar um novo processo
+        }
 
-    public void IniciarProcessos()
-    {
-        // A ser implementado
-        Process p1 = new(1, 2, null);
+        public void IniciarProcessos()
+        {
+            // Lógica para iniciar processos
+        }
     }
 }

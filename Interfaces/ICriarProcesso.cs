@@ -8,7 +8,9 @@ namespace SistemasOperacionais.Interfaces
 {
     public interface ICriarProcesso
     {
-        public void CriarProcesso() { }
+        public void CriarProcesso()
+        {
+        }
         public void IniciarProcessos() { }
     }
 }

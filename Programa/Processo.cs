@@ -9,6 +9,6 @@ using System.Threading.Tasks;
 
 namespace SistemasOperacionais.Programa;
 
-public class Processo : Modelo.ModeloProcesso
+public class Processo : Modelos.ModeloProcesso
 {
 }

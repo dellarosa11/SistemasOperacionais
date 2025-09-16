@@ -1,0 +1,5 @@
+/home/matheusdellarosa/Área de trabalho/Projeto Acconcia/SistemasOperacionais/obj/Debug/net8.0/SistemasOperacionais.GeneratedMSBuildEditorConfig.editorconfig
+/home/matheusdellarosa/Área de trabalho/Projeto Acconcia/SistemasOperacionais/obj/Debug/net8.0/SistemasOperacionais.AssemblyInfoInputs.cache
+/home/matheusdellarosa/Área de trabalho/Projeto Acconcia/SistemasOperacionais/obj/Debug/net8.0/SistemasOperacionais.AssemblyInfo.cs
+/home/matheusdellarosa/Área de trabalho/Projeto Acconcia/SistemasOperacionais/obj/Debug/net8.0/SistemasOperacionais.csproj.CoreCompileInputs.cache
+/home/matheusdellarosa/Área de trabalho/Projeto Acconcia/SistemasOperacionais/obj/Debug/net8.0/SistemasOperacionais.sourcelink.json

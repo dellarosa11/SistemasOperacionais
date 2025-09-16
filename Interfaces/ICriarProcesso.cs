@@ -10,7 +10,12 @@ namespace SistemasOperacionais.Interfaces
     {
         public void CriarProcesso()
         {
+            Console.WriteLine("Criando novo processo...");
         }
-        public void IniciarProcessos() { }
+        public void IniciarProcessos()
+        { 
+            Console.WriteLine("Iniciando processos...");
+
+        }
     }
 }

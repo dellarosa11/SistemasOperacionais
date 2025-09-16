@@ -4,36 +4,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SistemasOperacionais.Modelos;
+
+namespace SistemasOperacionais.Modelos
 {
+    public enum EstadoProcesso
+    {
+        Pronto = 0,
+        Executando = 1,
+        Bloqueado = 2
+    }
+
     public abstract class ModeloProcesso
     {
-        private ModeloProcesso? Pai { get; set; } = null;
-        private int Id { get; set; }
-        private int Estado { get; set; } = 0; // 0 - Pronto, 1 - Executando, 2 - Bloqueado
-        private int Prioridade { get; set; }
-        private bool FoiExecutado { get; set; } = false;
-        private int MemoriaAlocada { get; set; } = 0;
-        private int TempoExecucao { get; set; } = 0;
+        public ModeloProcesso? Pai { get; protected set; } = null;
+        public int Id { get; protected set; }
+        public EstadoProcesso Estado { get; protected set; } = EstadoProcesso.Pronto;
+        public int Prioridade { get; protected set; }
+        public bool FoiExecutado { get; protected set; } = false;
+        public int MemoriaAlocada { get; protected set; } = 0;
+        public int TempoExecucao { get; protected set; } = 0;
+
+        private static int _contadorId = 0;
+
+        protected ModeloProcesso(int prioridade, int memoriaAlocada, int tempoExecucao)
+        {
+            Id = ++_contadorId;
+            Prioridade = prioridade;
+            MemoriaAlocada = memoriaAlocada;
+            TempoExecucao = tempoExecucao;
+        }
 
         public virtual void Executar()
         {
-            Estado = 1;
+            Estado = EstadoProcesso.Executando;
             FoiExecutado = true;
-            Console.WriteLine($"Processo - {Id}, Executando");
+            Console.WriteLine($"[PID {Id}] Executando...");
         }
 
-        public virtual void Bloqueado()
+        public virtual void Bloquear()
         {
-            Estado = 2;
-            Console.WriteLine($"Processo - {Id}, Bloqueado");
+            Estado = EstadoProcesso.Bloqueado;
+            Console.WriteLine($"[PID {Id}] Bloqueado.");
         }
 
         public virtual void Desbloquear()
         {
-            Estado = 0;
-            Console.WriteLine($"Processo - {Id}, Pronta");
+            Estado = EstadoProcesso.Pronto;
+            Console.WriteLine($"[PID {Id}] Pronto para execução.");
         }
-
     }
 }

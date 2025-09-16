@@ -17,7 +17,7 @@ namespace SistemasOperacionais.Programa;
         {
         }
 
-        // Métodos
+        // Mï¿½todos
         public override void Executar()
         {
             estado = 1;

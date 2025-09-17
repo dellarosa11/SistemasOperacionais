@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using SistemasOperacionais.Modelos;
 
-namespace SistemasOperacionais.Interfaces;
-
-public interface IEscalonador
+namespace SistemasOperacionais.Interfaces
 {
-	int DecidirProxProcesso() {}
+    public interface IEscalonador
+    {
+        /// <summary>
+        /// Decide o próximo processo a executar a partir da lista de prontos.
+        /// Retorna null se não houver processo pronto.
+        /// </summary>
+        ModeloProcesso? DecidirProximoProcesso(IList<ModeloProcesso> prontos);
+    }
 }

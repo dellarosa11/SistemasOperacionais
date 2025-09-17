@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using SistemasOperacionais.Modelos;
 
 namespace SistemasOperacionais.Interfaces
 {
     public interface ICriarProcesso
     {
-        public void CriarProcesso()
-        {
-            Console.WriteLine("Criando novo processo...");
-        }
-        public void IniciarProcessos()
-        { 
-            Console.WriteLine("Iniciando processos...");
-
-        }
+        /// <summary>
+        /// Cria um conjunto inicial de processos (ou um único processo)
+        /// </summary>
+        IEnumerable<ModeloProcesso> CriarProcessos();
     }
 }

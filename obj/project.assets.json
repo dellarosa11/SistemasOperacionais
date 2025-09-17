@@ -8,24 +8,31 @@
     "net8.0": []
   },
   "packageFolders": {
-    "/home/matheusdellarosa/.nuget/packages/": {}
+    "C:\\Users\\badca\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/matheusdellarosa/Área de trabalho/Projeto Acconcia/SistemasOperacionais/SistemasOperacionais.csproj",
+      "projectUniqueName": "C:\\Users\\badca\\OneDrive\\Desktop\\SistemasOperacionais\\SistemasOperacionais.csproj",
       "projectName": "SistemasOperacionais",
-      "projectPath": "/home/matheusdellarosa/Área de trabalho/Projeto Acconcia/SistemasOperacionais/SistemasOperacionais.csproj",
-      "packagesPath": "/home/matheusdellarosa/.nuget/packages/",
-      "outputPath": "/home/matheusdellarosa/Área de trabalho/Projeto Acconcia/SistemasOperacionais/obj/",
+      "projectPath": "C:\\Users\\badca\\OneDrive\\Desktop\\SistemasOperacionais\\SistemasOperacionais.csproj",
+      "packagesPath": "C:\\Users\\badca\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\badca\\OneDrive\\Desktop\\SistemasOperacionais\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/home/matheusdellarosa/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\badca\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -38,7 +45,13 @@
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -59,7 +72,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.118/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

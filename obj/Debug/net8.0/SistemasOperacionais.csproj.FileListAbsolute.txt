@@ -3,3 +3,18 @@
 /home/matheusdellarosa/Área de trabalho/Projeto Acconcia/SistemasOperacionais/obj/Debug/net8.0/SistemasOperacionais.AssemblyInfo.cs
 /home/matheusdellarosa/Área de trabalho/Projeto Acconcia/SistemasOperacionais/obj/Debug/net8.0/SistemasOperacionais.csproj.CoreCompileInputs.cache
 /home/matheusdellarosa/Área de trabalho/Projeto Acconcia/SistemasOperacionais/obj/Debug/net8.0/SistemasOperacionais.sourcelink.json
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\obj\Debug\net8.0\SistemasOperacionais.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\obj\Debug\net8.0\SistemasOperacionais.AssemblyInfoInputs.cache
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\obj\Debug\net8.0\SistemasOperacionais.AssemblyInfo.cs
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\obj\Debug\net8.0\SistemasOperacionais.csproj.CoreCompileInputs.cache
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\obj\Debug\net8.0\SistemasOperacionais.sourcelink.json
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\bin\Debug\net8.0\SistemasOperacionais.exe
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\bin\Debug\net8.0\SistemasOperacionais.deps.json
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\bin\Debug\net8.0\SistemasOperacionais.runtimeconfig.json
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\bin\Debug\net8.0\SistemasOperacionais.dll
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\bin\Debug\net8.0\SistemasOperacionais.pdb
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\obj\Debug\net8.0\SistemasOperacionais.dll
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\obj\Debug\net8.0\refint\SistemasOperacionais.dll
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\obj\Debug\net8.0\SistemasOperacionais.pdb
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\obj\Debug\net8.0\SistemasOperacionais.genruntimeconfig.cache
+C:\Users\badca\OneDrive\Desktop\SistemasOperacionais\obj\Debug\net8.0\ref\SistemasOperacionais.dll

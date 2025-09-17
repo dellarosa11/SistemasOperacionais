@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SistemasOperacionais.Modelos;
 
 namespace SistemasOperacionais.Maquina
 {
@@ -9,50 +10,50 @@ namespace SistemasOperacionais.Maquina
         public int MaxSize { get; private set; } = 1024; // MB
         public int UsedMemory { get; private set; } = 0;
 
-        private readonly List<Processo> ProcessosNaMemoria = new List<Processo>();
+        private readonly List<ModeloProcesso> _processosNaMemoria = new List<ModeloProcesso>();
 
-        // Construtor
         public Memoria(int maxSize = 1024)
         {
+            if (maxSize <= 0) throw new ArgumentException("maxSize precisa ser > 0");
             MaxSize = maxSize;
-            Tamanho = Tamanho;
         }
 
-        // Aloca memória para um processo
-        public bool AlocarMemoria(Processo processo)
+        public bool AlocarMemoria(ModeloProcesso processo)
         {
-            if (UsedMemory + processo.Tamanho <= MaxSize)
+            if (processo == null) throw new ArgumentNullException(nameof(processo));
+            if (UsedMemory + processo.MemoriaAlocada <= MaxSize)
             {
-                ProcessosNaMemoria.Add(processo);
-                UsedMemory += processo.Tamanho;
+                _processosNaMemoria.Add(processo);
+                UsedMemory += processo.MemoriaAlocada;
                 return true;
             }
             return false;
         }
 
-        // Libera memória de um processo
-        public void LiberarMemoria(Processo processo)
+        public void LiberarMemoria(ModeloProcesso processo)
         {
-            if (ProcessosNaMemoria.Contains(processo))
+            if (processo == null) return;
+            if (_processosNaMemoria.Remove(processo))
             {
-                ProcessosNaMemoria.Remove(processo);
-                UsedMemory -= processo.Tamanho;
+                UsedMemory -= processo.MemoriaAlocada;
+                if (UsedMemory < 0) UsedMemory = 0;
             }
         }
 
-        // Mostra estado atual da memória
+        public IReadOnlyList<ModeloProcesso> ProcessosNaMemoria => _processosNaMemoria.AsReadOnly();
+
         public void MostrarEstadoMemoria()
         {
             Console.WriteLine($"Memória Total: {MaxSize} MB");
             Console.WriteLine($"Memória Usada: {UsedMemory} MB");
             Console.WriteLine($"Memória Livre: {MaxSize - UsedMemory} MB");
 
-            if (ProcessosNaMemoria.Any())
+            if (_processosNaMemoria.Any())
             {
-                Console.WriteLine("\nProcessos na memória:");
-                foreach (var processo in ProcessosNaMemoria)
+                Console.WriteLine("\nProcessos/Threads na memória:");
+                foreach (var p in _processosNaMemoria)
                 {
-                    Console.WriteLine($"- {processo.Nome} ({processo.Tamanho} MB)");
+                    Console.WriteLine($"- {p} ");
                 }
             }
             else

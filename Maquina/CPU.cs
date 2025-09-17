@@ -22,8 +22,10 @@ namespace SistemasOperacionais.Maquina
         /// Roda uma iteração de execução: pega da memória processos prontos, escolhe pelo escalonador e executa.
         /// Aqui usamos simulação com Task.Delay para representar o tempo de execução (TempoExecucao em ms).
         /// </summary>
-        public async Task RodarAsync()
+        public async Task RodarAsync(int ciclo)
         {
+            Console.WriteLine($"\n=== CICLO {ciclo} ===");
+
             var prontos = _memoria.ProcessosNaMemoria
                 .Where(p => p.Estado == EstadoProcesso.Pronto)
                 .ToList();
@@ -35,26 +37,32 @@ namespace SistemasOperacionais.Maquina
                 return;
             }
 
-            Console.WriteLine($"CPU: Escalonado processo PID {proximo.Id} para executar.");
+            Console.WriteLine($"CPU: Escalonado processo PID {proximo.Id} ({proximo.GetType().Name})");
             proximo.Executar();
 
-            // Simula execução (poderia ser por quantum, etc.)
             await Task.Delay(Math.Max(0, proximo.TempoExecucao));
 
-            // Simulação simples: após execução, marca finalizado e libera memória
             proximo.Finalizar();
             _memoria.LiberarMemoria(proximo);
             Console.WriteLine($"CPU: Processo PID {proximo.Id} finalizado e memória liberada.");
+
+            // Mostra estado atual da memória
+            _memoria.MostrarEstadoMemoria();
+
+            Console.WriteLine($"=== FIM CICLO {ciclo} ===");
+            await Task.Delay(1000); // pausa 1s antes do próximo ciclo
         }
+
 
         /// <summary>
         /// Executa várias iterações até não sobrar processos na memória.
         /// </summary>
         public async Task RodarTudoAsync()
         {
+            int ciclo = 1;
             while (_memoria.ProcessosNaMemoria.Any(p => p.Estado == EstadoProcesso.Pronto))
             {
-                await RodarAsync();
+                await RodarAsync(ciclo++);
             }
 
             Console.WriteLine("CPU: Todos processos finalizados ou nenhum pronto restante.");

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace SistemasOperacionais.Modelos
 {
@@ -21,6 +22,11 @@ namespace SistemasOperacionais.Modelos
         public int MemoriaAlocada { get; protected set; } = 0; // MB
         public int TempoExecucao { get; protected set; } = 0; // ms
 
+        // ✅ NOVOS CAMPOS
+        public int[] Registradores { get; private set; }
+        public int ContadorPrograma { get; private set; } = 0;
+        public List<string> ArquivosAbertos { get; private set; } = new List<string>();
+
         protected ModeloProcesso(int prioridade, int memoriaAlocada, int tempoExecucao, ModeloProcesso? pai = null)
         {
             Id = ++_contadorId;
@@ -28,13 +34,17 @@ namespace SistemasOperacionais.Modelos
             MemoriaAlocada = memoriaAlocada;
             TempoExecucao = tempoExecucao;
             Pai = pai;
+
+            // 8 registradores simulados
+            Registradores = new int[8];
         }
 
         public virtual void Executar()
         {
             Estado = EstadoProcesso.Executando;
             FoiExecutado = true;
-            Console.WriteLine($"[PID {Id}] Estado: {Estado} - iniciando execução por {TempoExecucao}ms.");
+            ContadorPrograma += TempoExecucao; // avança o "program counter"
+            Console.WriteLine($"[PID {Id}] Estado: {Estado} - executando (PC={ContadorPrograma}).");
         }
 
         public virtual void Bloquear()
@@ -55,9 +65,22 @@ namespace SistemasOperacionais.Modelos
             Console.WriteLine($"[PID {Id}] Finalizado.");
         }
 
+        // ✅ Manipulação de arquivos simulada
+        public void AbrirArquivo(string nome)
+        {
+            ArquivosAbertos.Add(nome);
+            Console.WriteLine($"[PID {Id}] abriu arquivo {nome}");
+        }
+
+        public void FecharArquivo(string nome)
+        {
+            if (ArquivosAbertos.Remove(nome))
+                Console.WriteLine($"[PID {Id}] fechou arquivo {nome}");
+        }
+
         public override string ToString()
         {
-            return $"[PID {Id}] Estado: {Estado} | Memória: {MemoriaAlocada}MB | Prioridade: {Prioridade}";
+            return $"[PID {Id}] Estado: {Estado} | Memória: {MemoriaAlocada}MB | Prioridade: {Prioridade} | PC={ContadorPrograma}";
         }
     }
 }

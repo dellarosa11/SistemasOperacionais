@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using SistemasOperacionais.Interfaces;
+﻿using SistemasOperacionais.Interfaces;
 using SistemasOperacionais.Modelos;
 
 namespace SistemasOperacionais.Escalonadores

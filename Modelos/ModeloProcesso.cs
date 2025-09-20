@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace SistemasOperacionais.Modelos
 {
     public enum EstadoProcesso
@@ -43,8 +40,7 @@ namespace SistemasOperacionais.Modelos
         {
             Estado = EstadoProcesso.Executando;
             FoiExecutado = true;
-            ContadorPrograma += TempoExecucao; // avança o "program counter"
-            Console.WriteLine($"[PID {Id}] Estado: {Estado} - executando (PC={ContadorPrograma}).");
+            ContadorPrograma += TempoExecucao;
         }
 
         public virtual void Bloquear()
@@ -62,7 +58,6 @@ namespace SistemasOperacionais.Modelos
         public virtual void Finalizar()
         {
             Estado = EstadoProcesso.Finalizado;
-            Console.WriteLine($"[PID {Id}] Finalizado.");
         }
 
         // ✅ Manipulação de arquivos simulada
@@ -80,7 +75,7 @@ namespace SistemasOperacionais.Modelos
 
         public override string ToString()
         {
-            return $"[PID {Id}] Estado: {Estado} | Memória: {MemoriaAlocada}MB | Prioridade: {Prioridade} | PC={ContadorPrograma}";
+            return $"PID {Id} - Mem: {MemoriaAlocada}MB - Prio: {Prioridade}";
         }
     }
 }

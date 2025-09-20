@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using SistemasOperacionais.Maquina;
+﻿using SistemasOperacionais.Maquina;
 using SistemasOperacionais.Modelos;
 using SistemasOperacionais.Escalonadores;
 
@@ -8,31 +6,25 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        var memoria = new Memoria(maxSize: 512); // 512MB
+        var memoria = new Memoria(maxSize: 64);
         var escalonador = new RoundRobinEscalonador();
         var cpu = new CPU(escalonador, memoria);
 
-        // Criar alguns processos de exemplo
-        var p1 = new Processo("EditorTexto", prioridade: 1, memoriaAlocada: 100, tempoExecucao: 500);
-        var p2 = new Processo("Compilador", prioridade: 2, memoriaAlocada: 200, tempoExecucao: 800);
-        var p3 = new Processo("PlayerMusica", prioridade: 1, memoriaAlocada: 50, tempoExecucao: 300);
-
-
-        // Alocar memória (simulação)
-        Console.WriteLine("Tentando alocar processos na memória...");
-        foreach (var p in new[] { p1, p2, p3 })
+        // cria alguns processos
+        var processos = new[]
         {
-            if (memoria.AlocarMemoria(p))
-                Console.WriteLine($"Alocado: {p}");
-            else
-                Console.WriteLine($"Falha ao alocar: {p}");
-        }
+            new Processo("EditorTexto", prioridade: 1, memoriaAlocada: 10, tempoExecucao: 500),
+            new Processo("Compilador", prioridade: 2, memoriaAlocada: 20, tempoExecucao: 800),
+            new Processo("PlayerMusica", prioridade: 1, memoriaAlocada: 8, tempoExecucao: 300),
+            new Processo("Navegador", prioridade: 3, memoriaAlocada: 16, tempoExecucao: 600),
+            new Processo("Planilha", prioridade: 1, memoriaAlocada: 12, tempoExecucao: 400)
+        };
 
-        memoria.MostrarEstadoMemoria();
+        Console.WriteLine("Carregando processos na FILA (não diretamente na memória)...\n");
+        cpu.AdicionarProcessos(processos);
 
-        // Rodar tudo
+        // CPU cuida de tudo automaticamente
         await cpu.RodarTudoAsync();
-
-        memoria.MostrarEstadoMemoria();
+        
     }
 }

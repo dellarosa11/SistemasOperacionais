@@ -1,7 +1,4 @@
-﻿using System;
-using SistemasOperacionais.Modelos;
-
-namespace SistemasOperacionais.Modelos
+﻿namespace SistemasOperacionais.Modelos
 {
     public class Processo : ModeloProcesso
     {

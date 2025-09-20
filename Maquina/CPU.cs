@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using SistemasOperacionais.Interfaces;
+Ôªøusing SistemasOperacionais.Interfaces;
 using SistemasOperacionais.Modelos;
 
 namespace SistemasOperacionais.Maquina
@@ -11,6 +7,11 @@ namespace SistemasOperacionais.Maquina
     {
         private readonly IEscalonador _escalonador;
         private readonly Memoria _memoria;
+        private readonly Queue<ModeloProcesso> _filaDeNovos = new Queue<ModeloProcesso>();
+
+        // Ajuste aqui para controlar a velocidade da simula√ß√£o
+        private const int FatorLentidao = 5;        // multiplica o tempo de execu√ß√£o
+        private const int PausaEntreCiclosMs = 2000; // pausa entre ciclos para leitura
 
         public CPU(IEscalonador escalonador, Memoria memoria)
         {
@@ -19,13 +20,49 @@ namespace SistemasOperacionais.Maquina
         }
 
         /// <summary>
-        /// Roda uma iteraÁ„o de execuÁ„o: pega da memÛria processos prontos, escolhe pelo escalonador e executa.
-        /// Aqui usamos simulaÁ„o com Task.Delay para representar o tempo de execuÁ„o (TempoExecucao em ms).
+        /// Adiciona novos processos na fila de espera (ainda fora da mem√≥ria).
+        /// </summary>
+        public void AdicionarProcessos(IEnumerable<ModeloProcesso> processos)
+        {
+            if (processos == null) return;
+            foreach (var p in processos)
+                _filaDeNovos.Enqueue(p);
+        }
+
+        /// <summary>
+        /// Tenta carregar automaticamente novos processos na mem√≥ria (First Fit).
+        /// Mant√©m a ordem da fila: se o primeiro n√£o couber, para (poderia expandir para rota√ß√£o).
+        /// </summary>
+        private void CarregarNovos()
+        {
+            int tentativas = _filaDeNovos.Count;
+            for (int i = 0; i < tentativas; i++)
+            {
+                var processo = _filaDeNovos.Peek();
+                if (_memoria.AlocarMemoria(processo))
+                {
+                    Console.WriteLine($"[LOAD] {processo} carregado na mem√≥ria.");
+                    _filaDeNovos.Dequeue();
+                }
+                else
+                {
+                    // n√£o coube agora ‚Üí tenta no pr√≥ximo ciclo
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Roda uma itera√ß√£o de execu√ß√£o.
         /// </summary>
         public async Task RodarAsync(int ciclo)
         {
             Console.WriteLine($"\n=== CICLO {ciclo} ===");
 
+            // tenta carregar novos processos
+            CarregarNovos();
+
+            // pega os prontos (garante que 'prontos' existe)
             var prontos = _memoria.ProcessosNaMemoria
                 .Where(p => p.Estado == EstadoProcesso.Pronto)
                 .ToList();
@@ -33,39 +70,45 @@ namespace SistemasOperacionais.Maquina
             var proximo = _escalonador.DecidirProximoProcesso(prontos);
             if (proximo == null)
             {
-                Console.WriteLine("CPU: Nenhum processo pronto para executar.");
+                Console.WriteLine("[INFO] Nenhum processo pronto.");
+                // pausa curta para n√£o travar o loop (e para leitura)
+                await Task.Delay(PausaEntreCiclosMs);
                 return;
             }
 
-            Console.WriteLine($"CPU: Escalonado processo PID {proximo.Id} ({proximo.GetType().Name})");
+            Console.WriteLine($"[EXEC] {proximo} rodando por {proximo.TempoExecucao}ms");
             proximo.Executar();
 
-            await Task.Delay(Math.Max(0, proximo.TempoExecucao));
+            // calcula delay com prote√ß√£o contra overflow
+            long delayLong = (long)proximo.TempoExecucao * (long)FatorLentidao;
+            int delayToUse = delayLong > int.MaxValue ? int.MaxValue : (int)delayLong;
+
+            await Task.Delay(Math.Max(0, delayToUse));
 
             proximo.Finalizar();
-            _memoria.LiberarMemoria(proximo);
-            Console.WriteLine($"CPU: Processo PID {proximo.Id} finalizado e memÛria liberada.");
+            Console.WriteLine($"[FIM]  {proximo} finalizado");
 
-            // Mostra estado atual da memÛria
+            _memoria.LiberarMemoria(proximo);
             _memoria.MostrarEstadoMemoria();
 
             Console.WriteLine($"=== FIM CICLO {ciclo} ===");
-            await Task.Delay(1000); // pausa 1s antes do prÛximo ciclo
+
+            // pausa extra entre ciclos para leitura
+            await Task.Delay(PausaEntreCiclosMs);
         }
 
-
         /// <summary>
-        /// Executa v·rias iteraÁıes atÈ n„o sobrar processos na memÛria.
+        /// Executa v√°rias itera√ß√µes at√© n√£o sobrar processos na mem√≥ria nem na fila.
         /// </summary>
         public async Task RodarTudoAsync()
         {
             int ciclo = 1;
-            while (_memoria.ProcessosNaMemoria.Any(p => p.Estado == EstadoProcesso.Pronto))
+            while (_memoria.ProcessosNaMemoria.Any(p => p.Estado == EstadoProcesso.Pronto) || _filaDeNovos.Any())
             {
                 await RodarAsync(ciclo++);
             }
 
-            Console.WriteLine("CPU: Todos processos finalizados ou nenhum pronto restante.");
+            Console.WriteLine("CPU: Todos os processos foram finalizados.");
         }
     }
 }

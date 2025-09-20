@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using SistemasOperacionais.Modelos;
+﻿using SistemasOperacionais.Modelos;
 
 namespace SistemasOperacionais.Interfaces
 {

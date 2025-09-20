@@ -1,6 +1,3 @@
-using System;
-using SistemasOperacionais.Modelos;
-
 namespace SistemasOperacionais.Modelos
 {
     public class ThreadProcesso : ModeloProcesso

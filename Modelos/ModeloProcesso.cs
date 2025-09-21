@@ -19,7 +19,7 @@ namespace SistemasOperacionais.Modelos
         public int MemoriaAlocada { get; protected set; } = 0; // MB
         public int TempoExecucao { get; protected set; } = 0; // ms
 
-        // ✅ NOVOS CAMPOS
+        // Novos Campos
         public int[] Registradores { get; private set; }
         public int ContadorPrograma { get; private set; } = 0;
         public List<string> ArquivosAbertos { get; private set; } = new List<string>();
@@ -60,7 +60,7 @@ namespace SistemasOperacionais.Modelos
             Estado = EstadoProcesso.Finalizado;
         }
 
-        // ✅ Manipulação de arquivos simulada
+        // Manipulação de arquivos simulada
         public void AbrirArquivo(string nome)
         {
             ArquivosAbertos.Add(nome);
@@ -73,7 +73,7 @@ namespace SistemasOperacionais.Modelos
                 Console.WriteLine($"[PID {Id}] fechou arquivo {nome}");
         }
 
-        public override string ToString()
+        public virtual string ExibirProcesso()
         {
             return $"PID {Id} - Mem: {MemoriaAlocada}MB - Prio: {Prioridade}";
         }

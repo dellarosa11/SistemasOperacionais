@@ -19,9 +19,7 @@ namespace SistemasOperacionais.Maquina
             _memoria = memoria ?? throw new ArgumentNullException(nameof(memoria));
         }
 
-        /// <summary>
         /// Adiciona novos processos na fila de espera (ainda fora da memória).
-        /// </summary>
         public void AdicionarProcessos(IEnumerable<ModeloProcesso> processos)
         {
             if (processos == null) return;
@@ -29,10 +27,8 @@ namespace SistemasOperacionais.Maquina
                 _filaDeNovos.Enqueue(p);
         }
 
-        /// <summary>
         /// Tenta carregar automaticamente novos processos na memória (First Fit).
         /// Mantém a ordem da fila: se o primeiro não couber, para (poderia expandir para rotação).
-        /// </summary>
         private void CarregarNovos()
         {
             int tentativas = _filaDeNovos.Count;
@@ -52,9 +48,7 @@ namespace SistemasOperacionais.Maquina
             }
         }
 
-        /// <summary>
         /// Roda uma iteração de execução.
-        /// </summary>
         public async Task RodarAsync(int ciclo)
         {
             Console.WriteLine($"\n=== CICLO {ciclo} ===");
@@ -97,9 +91,7 @@ namespace SistemasOperacionais.Maquina
             await Task.Delay(PausaEntreCiclosMs);
         }
 
-        /// <summary>
         /// Executa várias iterações até não sobrar processos na memória nem na fila.
-        /// </summary>
         public async Task RodarTudoAsync()
         {
             int ciclo = 1;

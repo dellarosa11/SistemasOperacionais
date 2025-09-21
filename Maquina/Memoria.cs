@@ -25,9 +25,7 @@ namespace SistemasOperacionais.Maquina
             _blocos.Add(new BlocoMemoria { Inicio = 0, Tamanho = maxSize, Processo = null });
         }
 
-        /// <summary>
         /// Aloca memória para um processo usando First Fit
-        /// </summary>
         public bool AlocarMemoria(ModeloProcesso processo)
         {
             if (processo == null) throw new ArgumentNullException(nameof(processo));
@@ -60,9 +58,7 @@ namespace SistemasOperacionais.Maquina
             return true;
         }
 
-        /// <summary>
         /// Libera memória de um processo
-        /// </summary>
         public void LiberarMemoria(ModeloProcesso processo)
         {
             if (processo == null) return;

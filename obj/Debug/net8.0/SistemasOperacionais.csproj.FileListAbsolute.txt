@@ -33,3 +33,6 @@ C:\Users\Dell\Desktop\SistemasOperacionais\obj\Debug\net8.0\refint\SistemasOpera
 C:\Users\Dell\Desktop\SistemasOperacionais\obj\Debug\net8.0\SistemasOperacionais.pdb
 C:\Users\Dell\Desktop\SistemasOperacionais\obj\Debug\net8.0\SistemasOperacionais.genruntimeconfig.cache
 C:\Users\Dell\Desktop\SistemasOperacionais\obj\Debug\net8.0\ref\SistemasOperacionais.dll
+E:\Downloads\Repos\SistemasOperacionais\obj\Debug\net8.0\SistemasOperacionais.dll
+E:\Downloads\Repos\SistemasOperacionais\obj\Debug\net8.0\refint\SistemasOperacionais.dll
+E:\Downloads\Repos\SistemasOperacionais\obj\Debug\net8.0\SistemasOperacionais.pdb

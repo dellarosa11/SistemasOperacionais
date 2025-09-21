@@ -17,9 +17,9 @@
             // Simulação simples: apenas mensurar; tempo real pode ser simulado externamente
         }
 
-        public override string ToString()
+        public override string ExibirProcesso()
         {
-            return $"[PID {Id}] {Nome} | Estado: {Estado} | Memória: {MemoriaAlocada}MB | Prioridade: {Prioridade}";
+            return $"[PID {Id}] {Nome} | Estado: {Estado} | Memória: {MemoriaAlocada}MB | Prioridade: {Prioridade} | ID do Pai: {Pai.Id}";
         }
     }
 }

@@ -1,0 +1,52 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\pc\\source\\repos\\SistemasOperacionais\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{87E96780-9779-4332-AF62-9B004813C41B}|SistemasOperacionais.csproj|c:\\users\\pc\\source\\repos\\sistemasoperacionais\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{87E96780-9779-4332-AF62-9B004813C41B}|SistemasOperacionais.csproj|solutionrelative:readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\pc\\Desktop\\Simula\u00E7\u00E3o de Sistema Operacional em C#.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Simula\u00E7\u00E3o de Sistema Operacional em C#.md",
+              "DocumentMoniker": "C:\\Users\\pc\\Desktop\\Simula\u00E7\u00E3o de Sistema Operacional em C#.md",
+              "RelativeDocumentMoniker": "..\\..\\..\\Desktop\\Simula\u00E7\u00E3o de Sistema Operacional em C#.md",
+              "ToolTip": "C:\\Users\\pc\\Desktop\\Simula\u00E7\u00E3o de Sistema Operacional em C#.md",
+              "RelativeToolTip": "..\\..\\..\\Desktop\\Simula\u00E7\u00E3o de Sistema Operacional em C#.md",
+              "ViewState": "AgIAADIAAAAAAAAAAAAAAD4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-12-01T21:25:25.562Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "README.md",
+              "DocumentMoniker": "C:\\Users\\pc\\source\\repos\\SistemasOperacionais\\README.md",
+              "RelativeDocumentMoniker": "README.md",
+              "ToolTip": "C:\\Users\\pc\\source\\repos\\SistemasOperacionais\\README.md",
+              "RelativeToolTip": "README.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-12-01T01:02:47.862Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

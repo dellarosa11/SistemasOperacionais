@@ -4,8 +4,10 @@ namespace SistemasOperacionais.Interfaces
 {
     public interface IEscalonador
     {
-        /// Decide o próximo processo a executar a partir da lista de prontos.
-        /// Retorna null se não houver processo pronto.
-        ModeloProcesso? DecidirProximoProcesso(IList<ModeloProcesso> prontos);
+        /// Adiciona um processo ou thread à fila de prontos.
+        void Adicionar(ModeloProcesso elemento);
+
+        /// Retorna o próximo elemento (processo ou thread) a ser executado.
+        ModeloProcesso? Proximo();
     }
 }

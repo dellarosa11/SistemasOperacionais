@@ -1,30 +1,50 @@
-﻿using SistemasOperacionais.Maquina;
-using SistemasOperacionais.Modelos;
+﻿using SistemasOperacionais.Modelos;
 using SistemasOperacionais.Escalonadores;
+using SistemasOperacionais.Interfaces;
+using SistemasOperacionais.Maquina;
 
 class Program
 {
-    static async Task Main(string[] args)
+    static void Main(string[] args)
     {
-        var memoria = new Memoria(maxSize: 64);
-        var escalonador = new RoundRobinEscalonador();
-        var cpu = new CPU(escalonador, memoria);
+        // 1. Inicializa o Sistema Operacional através da classe Boot
+        SistemaOperacional so = Boot.IniciarSistema();
 
-        // cria alguns processos
-        var processos = new[]
+        // Recupera os elementos para exibição (apenas para teste)
+        var processo1 = so.Processos.Find(p => p.Nome == "Navegador")!;
+        var processo2 = so.Processos.Find(p => p.Nome == "Compilador")!;
+        var processo3 = so.Processos.Find(p => p.Nome == "EditorTexto")!;
+        var processo4 = so.Processos.Find(p => p.Nome == "PlayerMusica")!;
+        var processo5 = so.Processos.Find(p => p.Nome == "Backup"); // Pode ser null se a alocação falhar
+        // Nota: Threads não são armazenadas diretamente em so.Threads, mas sim no escalonador.
+        // Para fins de teste, vamos apenas simular a execução.
+
+        Console.WriteLine("\nSimulação de Escalonamento de Processos e Threads (Round Robin)");
+        Console.WriteLine("----------------------------------------------------------");
+
+        // 2. Simulação de execução por ciclos
+        // Aumentando o número de ciclos para observar mais interações de IO
+        for (int i = 0; i < 20; i++)
         {
-            new Processo("EditorTexto", prioridade: 1, memoriaAlocada: 10, tempoExecucao: 500),
-            new Processo("Compilador", prioridade: 2, memoriaAlocada: 20, tempoExecucao: 800),
-            new Processo("PlayerMusica", prioridade: 1, memoriaAlocada: 8, tempoExecucao: 300),
-            new Processo("Navegador", prioridade: 3, memoriaAlocada: 16, tempoExecucao: 600),
-            new Processo("Planilha", prioridade: 1, memoriaAlocada: 12, tempoExecucao: 400)
-        };
+            so.ExecutarCiclo();
+        }
 
-        Console.WriteLine("Carregando processos na FILA (não diretamente na memória)...\n");
-        cpu.AdicionarProcessos(processos);
+        // 3. Exibição do Estado Final
+        Console.WriteLine("\nEstado Final dos Elementos:");
+        Console.WriteLine(processo1.ExibirElemento());
+        Console.WriteLine(processo2.ExibirElemento());
+        Console.WriteLine(processo3.ExibirElemento());
+        Console.WriteLine(processo4.ExibirElemento());
+        if (processo5 != null)
+        {
+            Console.WriteLine(processo5.ExibirElemento());
+        }
+        else
+        {
+            Console.WriteLine("Processo Backup (falhou na alocação de memória) - Não está na lista de processos do SO.");
+        }
 
-        // CPU cuida de tudo automaticamente
-        await cpu.RodarTudoAsync();
-        
+        // 4. Exibição do Relatório de Métricas
+        Console.WriteLine(so.Estatisticas.GerarRelatorio());
     }
 }

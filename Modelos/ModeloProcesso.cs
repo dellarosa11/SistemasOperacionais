@@ -8,7 +8,7 @@ namespace SistemasOperacionais.Modelos
         Finalizado = 3
     }
 
-    public abstract class ModeloProcesso
+    public abstract class ModeloProcesso // Representa o ElementoSO no diagrama UML
     {
         private static int _contadorId = 0;
         public int Id { get; }
@@ -16,19 +16,16 @@ namespace SistemasOperacionais.Modelos
         public EstadoProcesso Estado { get; protected set; } = EstadoProcesso.Pronto;
         public int Prioridade { get; protected set; }
         public bool FoiExecutado { get; protected set; } = false;
-        public int MemoriaAlocada { get; protected set; } = 0; // MB
         public int TempoExecucao { get; protected set; } = 0; // ms
 
-        // Novos Campos
+        // Campos do PCB/TCB (parte comum)
         public int[] Registradores { get; private set; }
         public int ContadorPrograma { get; private set; } = 0;
-        public List<string> ArquivosAbertos { get; private set; } = new List<string>();
 
-        protected ModeloProcesso(int prioridade, int memoriaAlocada, int tempoExecucao, ModeloProcesso? pai = null)
+        protected ModeloProcesso(int prioridade, int tempoExecucao, ModeloProcesso? pai = null)
         {
             Id = ++_contadorId;
             Prioridade = prioridade;
-            MemoriaAlocada = memoriaAlocada;
             TempoExecucao = tempoExecucao;
             Pai = pai;
 
@@ -61,21 +58,11 @@ namespace SistemasOperacionais.Modelos
         }
 
         // Manipulação de arquivos simulada
-        public void AbrirArquivo(string nome)
-        {
-            ArquivosAbertos.Add(nome);
-            Console.WriteLine($"[PID {Id}] abriu arquivo {nome}");
-        }
 
-        public void FecharArquivo(string nome)
-        {
-            if (ArquivosAbertos.Remove(nome))
-                Console.WriteLine($"[PID {Id}] fechou arquivo {nome}");
-        }
 
-        public virtual string ExibirProcesso()
+        public virtual string ExibirElemento()
         {
-            return $"PID {Id} - Mem: {MemoriaAlocada}MB - Prio: {Prioridade}";
+            return $"ID {Id} - Prio: {Prioridade} | Estado: {Estado}";
         }
     }
 }
